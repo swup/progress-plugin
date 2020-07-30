@@ -418,7 +418,7 @@ var ProgressBar = function () {
 	}, {
 		key: 'defaultCSS',
 		get: function get() {
-			return '\n    .' + this.className + ' {\n        position: fixed;\n        display: block;\n        top: 0;\n        left: 0;\n        height: 2px;\n        background: black;\n        z-index: 9999;\n        transition:\n          width ' + this.animationDuration + 'ms ease-out,\n          opacity ' + this.animationDuration / 2 + 'ms ' + this.animationDuration / 2 + 'ms ease-in;\n        transform: translate3d(0, 0, 0);\n      }\n    ';
+			return '\n    .' + this.className + ' {\n        position: fixed;\n        display: block;\n        top: 0;\n        left: 0;\n        height: 3px;\n        background-color: black;\n        z-index: 9999;\n        transition:\n          width ' + this.animationDuration + 'ms ease-out,\n          opacity ' + this.animationDuration / 2 + 'ms ' + this.animationDuration / 2 + 'ms ease-in;\n        transform: translate3d(0, 0, 0);\n      }\n    ';
 		}
 	}]);
 
