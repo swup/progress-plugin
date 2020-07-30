@@ -202,7 +202,7 @@ var SwupProgressPlugin = function (_Plugin) {
 		key: 'unmount',
 		value: function unmount() {
 			this.swup.off('transitionStart', this.startShowingProgress);
-			this.swup.on('contentReplaced', this.stopShowingProgress);
+			this.swup.off('contentReplaced', this.stopShowingProgress);
 		}
 	}]);
 
