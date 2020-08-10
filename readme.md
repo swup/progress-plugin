@@ -1,5 +1,7 @@
 # Swup Progress Bar Plugin
 
+**by [daun](https://github.com/daun)**
+
 This [swup](https://github.com/swup/swup) plugin will display a progress bar for
 all requests taking longer than ~300ms.
 
@@ -10,13 +12,13 @@ More or less a port of Turbolink's implementation.
 This plugin can be installed with npm
 
 ```bash
-npm install swup-progress-plugin
+npm install @swup/progress-plugin
 ```
 
 and included with import
 
 ```shell
-import SwupProgressPlugin from 'swup-progress-plugin';
+import SwupProgressPlugin from '@swup/progress-plugin';
 ```
 
 or included from the dist folder

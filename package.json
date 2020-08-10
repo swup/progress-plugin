@@ -1,6 +1,6 @@
 {
-  "name": "swup-progress-plugin",
-  "version": "0.1.2",
+  "name": "@swup/progress-plugin",
+  "version": "1.0.0",
   "description": "Swup plugin for displaying a loading indicator",
   "main": "lib/index.js",
   "scripts": {
@@ -13,10 +13,17 @@
     "email": "daun@daun.ltd",
     "url": "https://philippdaun.net"
   },
+  "contributors": [
+    {
+      "name": "Georgy Marchuk",
+      "email": "gmarcuk@gmail.com",
+      "url": "https://gmrchk.com/"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daun/swup-progress-plugin.git"
+    "url": "https://github.com/swup/progress-plugin.git"
   },
   "devDependencies": {
     "@swup/prettier-config": "^1.0.0",
