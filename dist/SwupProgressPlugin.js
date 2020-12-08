@@ -404,7 +404,7 @@ var ProgressBar = function () {
 		key: 'createStylesheetElement',
 		value: function createStylesheetElement() {
 			var element = document.createElement('style');
-			element.type = 'text/css';
+			element.setAttribute('data-progressbar-styles', '');
 			element.textContent = this.defaultCSS;
 			return element;
 		}
