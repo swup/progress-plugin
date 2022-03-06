@@ -58,7 +58,6 @@ export default class SwupProgressPlugin extends Plugin {
 
   hideProgressBar = () => {
     this.progressBar.hide();
-    console.log(this.options.transition);
   };
 
 	finishAnimationAndHideProgressBar = () => {
