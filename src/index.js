@@ -9,7 +9,8 @@ export default class SwupProgressPlugin extends Plugin {
 		const defaultOptions = {
 			className: 'swup-progress-bar',
 			transition: 300,
-			delay: 300
+			delay: 300,
+      hideImmediately: true
 		};
 
 		this.options = {
@@ -41,7 +42,12 @@ export default class SwupProgressPlugin extends Plugin {
 
 	stopShowingProgress = () => {
 		this.progressBar.setValue(1);
-		this.finishAnimationAndHideProgressBar();
+    if( this.options.hideImmediately ) {
+      this.hideProgressBar();
+    } else {
+      this.finishAnimationAndHideProgressBar();
+    }
+		
 	};
 
 	showProgressBar = () => {
