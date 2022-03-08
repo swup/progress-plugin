@@ -157,34 +157,48 @@ var SwupProgressPlugin = function (_Plugin) {
 
 		_this.stopShowingProgress = function () {
 			_this.progressBar.setValue(1);
-			_this.hideProgressBar();
+			if (_this.options.hideImmediately) {
+				_this.hideProgressBar();
+			} else {
+				_this.finishAnimationAndHideProgressBar();
+			}
 		};
 
 		_this.showProgressBar = function () {
+			if (_this.hideProgressBarTimeout != null) {
+				window.clearTimeout(_this.hideProgressBarTimeout);
+				delete _this.hideProgressBarTimeout;
+			}
 			_this.progressBar.show();
 		};
 
 		_this.showProgressBarAfterDelay = function () {
-			_this.progressBarTimeout = window.setTimeout(_this.showProgressBar, _this.options.delay);
+			_this.showProgressBarTimeout = window.setTimeout(_this.showProgressBar, _this.options.delay);
 		};
 
 		_this.hideProgressBar = function () {
 			_this.progressBar.hide();
-			if (_this.progressBarTimeout != null) {
-				window.clearTimeout(_this.progressBarTimeout);
-				delete _this.progressBarTimeout;
+		};
+
+		_this.finishAnimationAndHideProgressBar = function () {
+			_this.hideProgressBarTimeout = window.setTimeout(_this.hideProgressBar, _this.options.transition);
+
+			if (_this.showProgressBarTimeout != null) {
+				window.clearTimeout(_this.showProgressBarTimeout);
+				delete _this.showProgressBarTimeout;
 			}
 		};
 
 		var defaultOptions = {
 			className: 'swup-progress-bar',
 			transition: 300,
-			delay: 300
+			delay: 300,
+			hideImmediately: true
 		};
 
 		_this.options = _extends({}, defaultOptions, options);
 
-		_this.progressBarTimeout = null;
+		_this.showProgressBarTimeout = null;
 		_this.progressBar = new _ProgressBar2.default({
 			className: _this.options.className,
 			animationDuration: _this.options.transition
