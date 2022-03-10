@@ -75,4 +75,6 @@ Set to `0` to always display the progress bar, even on fast requests.
 
 ### hideImmediately
 
-If `false`, the progress bar will always finish it's animation to `width: 100%` before hiding itself.
+Whether the progress bar is hidden instantly after a page visit.
+
+Set to `false` to always complete the transition to `width: 100%` before hiding it.
