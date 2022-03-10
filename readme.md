@@ -54,7 +54,8 @@ The progressbar has a class name of `swup-progress-bar` you can use for styling.
 {
   className: 'swup-progress-bar',
   transition: 300,
-  delay: 300
+  delay: 300,
+  hideImmediately: true
 }
 ```
 
@@ -71,3 +72,9 @@ Length of CSS transition between loading states, in milliseconds.
 How long to wait before showing the progress bar, in milliseconds.
 
 Set to `0` to always display the progress bar, even on fast requests.
+
+### hideImmediately
+
+Whether the progress bar is hidden instantly after a page visit.
+
+Set to `false` to always complete the transition to `width: 100%` before hiding it.
