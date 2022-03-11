@@ -162,6 +162,11 @@ var SwupProgressPlugin = function (_Plugin) {
 			} else {
 				_this.finishAnimationAndHideProgressBar();
 			}
+
+			if (_this.showProgressBarTimeout != null) {
+				window.clearTimeout(_this.showProgressBarTimeout);
+				delete _this.showProgressBarTimeout;
+			}
 		};
 
 		_this.showProgressBar = function () {
@@ -182,11 +187,6 @@ var SwupProgressPlugin = function (_Plugin) {
 
 		_this.finishAnimationAndHideProgressBar = function () {
 			_this.hideProgressBarTimeout = window.setTimeout(_this.hideProgressBar, _this.options.transition);
-
-			if (_this.showProgressBarTimeout != null) {
-				window.clearTimeout(_this.showProgressBarTimeout);
-				delete _this.showProgressBarTimeout;
-			}
 		};
 
 		var defaultOptions = {
