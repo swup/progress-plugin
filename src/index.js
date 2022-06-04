@@ -47,6 +47,11 @@ export default class SwupProgressPlugin extends Plugin {
 		} else {
 			this.finishAnimationAndHideProgressBar();
 		}
+
+		if (this.showProgressBarTimeout != null) {
+			window.clearTimeout(this.showProgressBarTimeout);
+			delete this.showProgressBarTimeout;
+		}
 	};
 	
 	showProgressBar = () => {
@@ -67,10 +72,5 @@ export default class SwupProgressPlugin extends Plugin {
 	
 	finishAnimationAndHideProgressBar = () => {
 		this.hideProgressBarTimeout = window.setTimeout(this.hideProgressBar, this.options.transition);
-		
-		if (this.showProgressBarTimeout != null) {
-			window.clearTimeout(this.showProgressBarTimeout);
-			delete this.showProgressBarTimeout;
-		}
 	};
 }
