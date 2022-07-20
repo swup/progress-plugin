@@ -77,6 +77,7 @@ export default class ProgressBar {
 		this.progressElement.style.width = '0';
 		this.progressElement.style.opacity = '1';
 		document.documentElement.insertBefore(this.progressElement, document.body);
+    this.setValue(Math.random() * 0.4);
 		this.refresh();
 	}
 
@@ -109,7 +110,7 @@ export default class ProgressBar {
 
 	refresh() {
 		requestAnimationFrame(() => {
-			this.progressElement.style.width = `${10 + this.value * 90}%`;
+			this.progressElement.style.width = `${this.value * 100}%`;
 		});
 	}
 
