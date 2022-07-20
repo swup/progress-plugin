@@ -1,5 +1,5 @@
 export default class ProgressBar {
-	stylesheetElement = null;
+	styleElement = null;
 	progressElement = null;
 
 	value = 0;
@@ -7,7 +7,6 @@ export default class ProgressBar {
 	hiding = false;
 	trickleInterval = null;
 
-		this.stylesheetElement = this.createStylesheetElement();
 	constructor({
 		className = 'progress-bar',
 		styleAttr = 'data-progressbar-styles',
@@ -23,10 +22,11 @@ export default class ProgressBar {
 		this.initialValue = initialValue;
 		this.trickleValue = trickleValue;
 
+		this.styleElement = this.createStyleElement();
 		this.progressElement = this.createProgressElement();
 	}
 
-	get defaultCSS() {
+	get defaultStyles() {
 		return `
 		.${this.className} {
 				position: fixed;
@@ -47,7 +47,7 @@ export default class ProgressBar {
 	show() {
 		if (!this.visible) {
 			this.visible = true;
-			this.installStylesheetElement();
+			this.installStyleElement();
 			this.installProgressElement();
 			this.startTrickling();
 		}
@@ -72,8 +72,8 @@ export default class ProgressBar {
 
 	// Private
 
-	installStylesheetElement() {
-		document.head.insertBefore(this.stylesheetElement, document.head.firstChild);
+	installStyleElement() {
+		document.head.insertBefore(this.styleElement, document.head.firstChild);
 	}
 
 	installProgressElement() {
@@ -118,10 +118,10 @@ export default class ProgressBar {
 		});
 	}
 
-	createStylesheetElement() {
+	createStyleElement() {
 		const element = document.createElement('style');
-		element.textContent = this.defaultCSS;
 		element.setAttribute(this.styleAttr, '');
+		element.textContent = this.defaultStyles;
 		return element;
 	}
 
