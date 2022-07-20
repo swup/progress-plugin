@@ -13,11 +13,15 @@ export default class ProgressBar {
 		styleAttr = 'data-progressbar-styles',
 		animationDuration = 300,
 		minValue = 0.1,
+		initialValue = 0.25,
+		trickleValue = 0.03
 	} = {}) {
 		this.className = className;
 		this.styleAttr = styleAttr;
 		this.animationDuration = animationDuration;
 		this.minValue = minValue;
+		this.initialValue = initialValue;
+		this.trickleValue = trickleValue;
 
 		this.progressElement = this.createProgressElement();
 	}
@@ -76,7 +80,7 @@ export default class ProgressBar {
 		this.progressElement.style.width = '0%';
 		this.progressElement.style.opacity = '1';
 		document.documentElement.insertBefore(this.progressElement, document.body);
-    this.setValue(Math.random() * 0.4);
+		this.setValue(Math.random() * this.initialValue);
 	}
 
 	fadeProgressElement(callback) {
