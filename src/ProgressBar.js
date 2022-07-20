@@ -90,7 +90,7 @@ export default class ProgressBar {
 
 	uninstallProgressElement() {
 		if (this.progressElement.parentNode) {
-			// document.documentElement.removeChild(this.progressElement);
+			document.documentElement.removeChild(this.progressElement);
 		}
 	}
 
