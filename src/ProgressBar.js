@@ -63,7 +63,7 @@ export default class ProgressBar {
 	}
 
 	setValue(value) {
-		this.value = Math.max(this.minValue, value);
+		this.value = Math.min(1, Math.max(this.minValue, value));
 		this.refresh();
 	}
 
