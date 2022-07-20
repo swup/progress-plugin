@@ -389,6 +389,7 @@ var ProgressBar = function () {
 			this.progressElement.style.width = '0%';
 			this.progressElement.style.opacity = '1';
 			document.documentElement.insertBefore(this.progressElement, document.body);
+			this.progressElement.scrollTop = 0; // Force reflow to ensure initial style takes effect
 			this.setValue(Math.random() * this.initialValue);
 		}
 	}, {
@@ -423,9 +424,7 @@ var ProgressBar = function () {
 			var _this3 = this;
 
 			requestAnimationFrame(function () {
-				requestAnimationFrame(function () {
-					_this3.progressElement.style.width = _this3.value * 100 + '%';
-				});
+				_this3.progressElement.style.width = _this3.value * 100 + '%';
 			});
 		}
 	}, {
