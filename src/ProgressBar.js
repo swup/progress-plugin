@@ -100,9 +100,6 @@ export default class ProgressBar {
 	stopTrickling() {
 		window.clearInterval(this.trickleInterval);
 		delete this.trickleInterval;
-
-    window.clearTimeout(this.refreshTimeout);
-    delete this.refreshTimeout;
 	}
 
 	trickle = () => {
@@ -111,10 +108,11 @@ export default class ProgressBar {
 	};
 
 	refresh() {
-    window.clearTimeout(this.refreshTimeout)
-    this.refreshTimeout = setTimeout(() => {
-      this.progressElement.style.width = `${this.value * 100}%`;
-    }, 10)
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				this.progressElement.style.width = `${this.value * 100}%`;
+			});
+		});
 	}
 
 	createStylesheetElement() {
