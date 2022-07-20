@@ -3,14 +3,16 @@ import ProgressBar from './ProgressBar';
 
 export default class SwupProgressPlugin extends Plugin {
 	name = 'SwupProgressPlugin';
-	constructor(options) {
 
+	constructor(options = {}) {
 		super();
 		const defaultOptions = {
 			className: 'swup-progress-bar',
-			transition: 300,
 			delay: 300,
-			hideImmediately: true
+			transition: undefined,
+			minValue: undefined,
+			initialValue: undefined,
+			hideImmediately: true,
 		};
 
 		this.options = {
@@ -22,7 +24,9 @@ export default class SwupProgressPlugin extends Plugin {
 
 		this.progressBar = new ProgressBar({
 			className: this.options.className,
-			animationDuration: this.options.transition
+			animationDuration: this.options.transition,
+			minValue: this.options.minValue,
+			initialValue: this.options.initialValue
 		});
 	}
 
