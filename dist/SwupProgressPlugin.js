@@ -360,7 +360,7 @@ var ProgressBar = function () {
 	}, {
 		key: 'setValue',
 		value: function setValue(value) {
-			this.value = Math.max(this.minValue, value);
+			this.value = Math.min(1, Math.max(this.minValue, value));
 			this.refresh();
 		}
 
@@ -374,10 +374,10 @@ var ProgressBar = function () {
 	}, {
 		key: 'installProgressElement',
 		value: function installProgressElement() {
-			this.progressElement.style.width = '0';
+			this.progressElement.style.width = '0%';
 			this.progressElement.style.opacity = '1';
 			document.documentElement.insertBefore(this.progressElement, document.body);
-			this.refresh();
+			this.setValue(Math.random() * 0.4);
 		}
 	}, {
 		key: 'fadeProgressElement',
@@ -389,7 +389,7 @@ var ProgressBar = function () {
 		key: 'uninstallProgressElement',
 		value: function uninstallProgressElement() {
 			if (this.progressElement.parentNode) {
-				document.documentElement.removeChild(this.progressElement);
+				// document.documentElement.removeChild(this.progressElement);
 			}
 		}
 	}, {
@@ -404,15 +404,19 @@ var ProgressBar = function () {
 		value: function stopTrickling() {
 			window.clearInterval(this.trickleInterval);
 			delete this.trickleInterval;
+
+			window.clearTimeout(this.refreshTimeout);
+			delete this.refreshTimeout;
 		}
 	}, {
 		key: 'refresh',
 		value: function refresh() {
 			var _this3 = this;
 
-			requestAnimationFrame(function () {
-				_this3.progressElement.style.width = 10 + _this3.value * 90 + '%';
-			});
+			window.clearTimeout(this.refreshTimeout);
+			this.refreshTimeout = setTimeout(function () {
+				_this3.progressElement.style.width = _this3.value * 100 + '%';
+			}, 10);
 		}
 	}, {
 		key: 'createStylesheetElement',
