@@ -1,25 +1,24 @@
 export default class ProgressBar {
-	className = 'progress-bar';
-	animationDuration = 300; // ms
-	minValue = 0.1;
-
 	stylesheetElement = null;
 	progressElement = null;
 
-	hiding = false;
-	trickleInterval = null;
 	value = 0;
 	visible = false;
-
-	constructor({ className = null, animationDuration = null }) {
-		if (className !== null) {
-			this.className = className;
-		}
-		if (animationDuration !== null) {
-			this.animationDuration = animationDuration;
-		}
+	hiding = false;
+	trickleInterval = null;
 
 		this.stylesheetElement = this.createStylesheetElement();
+	constructor({
+		className = 'progress-bar',
+		styleAttr = 'data-progressbar-styles',
+		animationDuration = 300,
+		minValue = 0.1,
+	} = {}) {
+		this.className = className;
+		this.styleAttr = styleAttr;
+		this.animationDuration = animationDuration;
+		this.minValue = minValue;
+
 		this.progressElement = this.createProgressElement();
 	}
 
@@ -103,7 +102,7 @@ export default class ProgressBar {
 	}
 
 	trickle = () => {
-		const advance = (Math.random() * 3) / 100;
+		const advance = Math.random() * this.trickleValue;
 		this.setValue(this.value + advance);
 	};
 
@@ -117,8 +116,8 @@ export default class ProgressBar {
 
 	createStylesheetElement() {
 		const element = document.createElement('style');
-		element.setAttribute('data-progressbar-styles', '');
 		element.textContent = this.defaultCSS;
+		element.setAttribute(this.styleAttr, '');
 		return element;
 	}
 
