@@ -25,20 +25,20 @@ export default class ProgressBar {
 
 	get defaultCSS() {
 		return `
-    .${this.className} {
-        position: fixed;
-        display: block;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background-color: black;
-        z-index: 9999;
-        transition:
-          width ${this.animationDuration}ms ease-out,
-          opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
-        transform: translate3d(0, 0, 0);
-      }
-    `;
+		.${this.className} {
+				position: fixed;
+				display: block;
+				top: 0;
+				left: 0;
+				height: 3px;
+				background-color: black;
+				z-index: 9999;
+				transition:
+					width ${this.animationDuration}ms ease-out,
+					opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
+				transform: translate3d(0, 0, 0);
+			}
+		`;
 	}
 
 	show() {
