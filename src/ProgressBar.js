@@ -74,11 +74,10 @@ export default class ProgressBar {
 	}
 
 	installProgressElement() {
-		this.progressElement.style.width = '0';
+		this.progressElement.style.width = '0%';
 		this.progressElement.style.opacity = '1';
 		document.documentElement.insertBefore(this.progressElement, document.body);
     this.setValue(Math.random() * 0.4);
-		this.refresh();
 	}
 
 	fadeProgressElement(callback) {
@@ -88,7 +87,7 @@ export default class ProgressBar {
 
 	uninstallProgressElement() {
 		if (this.progressElement.parentNode) {
-			document.documentElement.removeChild(this.progressElement);
+			// document.documentElement.removeChild(this.progressElement);
 		}
 	}
 
@@ -101,6 +100,9 @@ export default class ProgressBar {
 	stopTrickling() {
 		window.clearInterval(this.trickleInterval);
 		delete this.trickleInterval;
+
+    window.clearTimeout(this.refreshTimeout);
+    delete this.refreshTimeout;
 	}
 
 	trickle = () => {
@@ -109,9 +111,10 @@ export default class ProgressBar {
 	};
 
 	refresh() {
-		requestAnimationFrame(() => {
-			this.progressElement.style.width = `${this.value * 100}%`;
-		});
+    window.clearTimeout(this.refreshTimeout)
+    this.refreshTimeout = setTimeout(() => {
+      this.progressElement.style.width = `${this.value * 100}%`;
+    }, 10)
 	}
 
 	createStylesheetElement() {
