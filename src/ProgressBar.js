@@ -1,50 +1,53 @@
 export default class ProgressBar {
-	className = 'progress-bar';
-	animationDuration = 300; // ms
-	minValue = 0.1;
-
-	stylesheetElement = null;
+	styleElement = null;
 	progressElement = null;
 
-	hiding = false;
-	trickleInterval = null;
 	value = 0;
 	visible = false;
+	hiding = false;
+	trickleInterval = null;
 
-	constructor({ className = null, animationDuration = null }) {
-		if (className !== null) {
-			this.className = className;
-		}
-		if (animationDuration !== null) {
-			this.animationDuration = animationDuration;
-		}
+	constructor({
+		className = 'progress-bar',
+		styleAttr = 'data-progressbar-styles',
+		animationDuration = 300,
+		minValue = 0.1,
+		initialValue = 0.25,
+		trickleValue = 0.03
+	} = {}) {
+		this.className = className;
+		this.styleAttr = styleAttr;
+		this.animationDuration = animationDuration;
+		this.minValue = minValue;
+		this.initialValue = initialValue;
+		this.trickleValue = trickleValue;
 
-		this.stylesheetElement = this.createStylesheetElement();
+		this.styleElement = this.createStyleElement();
 		this.progressElement = this.createProgressElement();
 	}
 
-	get defaultCSS() {
+	get defaultStyles() {
 		return `
-    .${this.className} {
-        position: fixed;
-        display: block;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background-color: black;
-        z-index: 9999;
-        transition:
-          width ${this.animationDuration}ms ease-out,
-          opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
-        transform: translate3d(0, 0, 0);
-      }
-    `;
+		.${this.className} {
+				position: fixed;
+				display: block;
+				top: 0;
+				left: 0;
+				height: 3px;
+				background-color: black;
+				z-index: 9999;
+				transition:
+					width ${this.animationDuration}ms ease-out,
+					opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
+				transform: translate3d(0, 0, 0);
+			}
+		`;
 	}
 
 	show() {
 		if (!this.visible) {
 			this.visible = true;
-			this.installStylesheetElement();
+			this.installStyleElement();
 			this.installProgressElement();
 			this.startTrickling();
 		}
@@ -63,21 +66,22 @@ export default class ProgressBar {
 	}
 
 	setValue(value) {
-		this.value = Math.max(this.minValue, value);
+		this.value = Math.min(1, Math.max(this.minValue, value));
 		this.refresh();
 	}
 
 	// Private
 
-	installStylesheetElement() {
-		document.head.insertBefore(this.stylesheetElement, document.head.firstChild);
+	installStyleElement() {
+		document.head.insertBefore(this.styleElement, document.head.firstChild);
 	}
 
 	installProgressElement() {
-		this.progressElement.style.width = '0';
+		this.progressElement.style.width = '0%';
 		this.progressElement.style.opacity = '1';
 		document.documentElement.insertBefore(this.progressElement, document.body);
-		this.refresh();
+		this.progressElement.scrollTop = 0; // Force reflow to ensure initial style takes effect
+		this.setValue(Math.random() * this.initialValue);
 	}
 
 	fadeProgressElement(callback) {
@@ -103,20 +107,20 @@ export default class ProgressBar {
 	}
 
 	trickle = () => {
-		const advance = (Math.random() * 3) / 100;
+		const advance = Math.random() * this.trickleValue;
 		this.setValue(this.value + advance);
 	};
 
 	refresh() {
 		requestAnimationFrame(() => {
-			this.progressElement.style.width = `${10 + this.value * 90}%`;
+			this.progressElement.style.width = `${this.value * 100}%`;
 		});
 	}
 
-	createStylesheetElement() {
+	createStyleElement() {
 		const element = document.createElement('style');
-		element.setAttribute('data-progressbar-styles', '');
-		element.textContent = this.defaultCSS;
+		element.setAttribute(this.styleAttr, '');
+		element.textContent = this.defaultStyles;
 		return element;
 	}
 
