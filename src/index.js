@@ -21,6 +21,7 @@ export default class SwupProgressPlugin extends Plugin {
 		};
 
 		this.showProgressBarTimeout = null;
+		this.hideProgressBarTimeout = null;
 
 		this.progressBar = new ProgressBar({
 			className: this.options.className,
@@ -76,16 +77,12 @@ export default class SwupProgressPlugin extends Plugin {
 	};
 
 	cancelShowProgressBarTimeout = () => {
-		if (this.showProgressBarTimeout) {
-			window.clearTimeout(this.showProgressBarTimeout);
-			delete this.showProgressBarTimeout;
-		}
+		window.clearTimeout(this.showProgressBarTimeout);
+		delete this.showProgressBarTimeout;
 	};
 
 	cancelHideProgressBarTimeout = () => {
-		if (this.hideProgressBarTimeout) {
-			window.clearTimeout(this.hideProgressBarTimeout);
-			delete this.hideProgressBarTimeout;
-		}
+		window.clearTimeout(this.hideProgressBarTimeout);
+		delete this.hideProgressBarTimeout;
 	};
 }
