@@ -1,11 +1,7 @@
 # Swup Progress Bar Plugin
 
-**by [daun](https://github.com/daun)**
-
 This [swup](https://github.com/swup/swup) plugin will display a progress bar for
 all requests taking longer than ~300ms.
-
-More or less a port of Turbolink's implementation.
 
 ## Installation
 
@@ -39,7 +35,7 @@ const swup = new Swup({
 
 ## Styling
 
-The progressbar has a class name of `swup-progress-bar` you can use for styling.
+The progress bar has a class name of `swup-progress-bar` you can use for styling.
 
 ```css
 .swup-progress-bar {
