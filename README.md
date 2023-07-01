@@ -1,26 +1,26 @@
 # Swup Progress Bar Plugin
 
-This [swup](https://github.com/swup/swup) plugin will display a progress bar for
-all requests taking longer than ~300ms.
+A [swup](https://swup.js.org) plugin for displaying a progress bar.
+
+Shows a loading indicator for requests taking longer than ~300ms.
+
 
 ## Installation
 
-This plugin can be installed with npm
+Install the plugin from npm and import it into your bundle.
 
 ```bash
 npm install @swup/progress-plugin
 ```
 
-and included with import
-
-```shell
+```js
 import SwupProgressPlugin from '@swup/progress-plugin';
 ```
 
-or included from the dist folder
+Or include the minified production file from a CDN:
 
 ```html
-<script src="./dist/SwupProgressPlugin.js"></script>
+<script src="https://unpkg.com/@swup/progress-plugin@3"></script>
 ```
 
 ## Usage
@@ -62,7 +62,7 @@ Class name to use for the container div.
 
 ### transition
 
-Length of CSS transition between loading states, in milliseconds.
+Length of the CSS transition between loading states, in milliseconds.
 
 ### delay
 
