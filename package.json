@@ -2,7 +2,7 @@
   "name": "@swup/progress-plugin",
   "amdName": "SwupProgressPlugin",
   "version": "2.0.0",
-  "description": "Swup plugin for displaying a loading indicator",
+  "description": "A swup plugin for displaying a progress bar",
   "type": "module",
   "source": "src/index.js",
   "main": "./dist/index.cjs",
