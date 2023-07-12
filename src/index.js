@@ -30,13 +30,13 @@ export default class SwupProgressPlugin extends Plugin {
 	}
 
 	mount() {
-		this.swup.hooks.on('transitionStart', this.startShowingProgress);
-		this.swup.hooks.on('replaceContent', this.stopShowingProgress);
+		this.swup.hooks.on('visit:start', this.startShowingProgress);
+		this.swup.hooks.on('content:replace', this.stopShowingProgress);
 	}
 
 	unmount() {
-		this.swup.hooks.off('transitionStart', this.startShowingProgress);
-		this.swup.hooks.off('replaceContent', this.stopShowingProgress);
+		this.swup.hooks.off('visit:start', this.startShowingProgress);
+		this.swup.hooks.off('content:replace', this.stopShowingProgress);
 	}
 
 	startShowingProgress = () => {
