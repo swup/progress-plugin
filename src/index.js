@@ -13,74 +13,65 @@ export default class SwupProgressPlugin extends Plugin {
 		hideImmediately: true
 	};
 
+	showProgressBarTimeout = null;
+	hideProgressBarTimeout = null;
+
 	constructor(options = {}) {
 		super();
 
 		this.options = { ...this.defaults, ...options };
 
-		this.showProgressBarTimeout = null;
-		this.hideProgressBarTimeout = null;
-
-		this.progressBar = new ProgressBar({
-			className: this.options.className,
-			animationDuration: this.options.transition,
-			minValue: this.options.minValue,
-			initialValue: this.options.initialValue
-		});
+		const { className, minValue, initialValue, transition: animationDuration } = this.options;
+		this.progressBar = new ProgressBar({ className, minValue, initialValue, animationDuration });
 	}
 
 	mount() {
-		this.swup.hooks.on('visit:start', this.startShowingProgress);
-		this.swup.hooks.on('content:replace', this.stopShowingProgress);
+		this.on('visit:start', this.startShowingProgress);
+		this.on('page:view', this.stopShowingProgress);
 	}
 
-	unmount() {
-		this.swup.hooks.off('visit:start', this.startShowingProgress);
-		this.swup.hooks.off('content:replace', this.stopShowingProgress);
-	}
-
-	startShowingProgress = () => {
+	startShowingProgress() {
 		this.progressBar.setValue(0);
 		this.showProgressBarAfterDelay();
-	};
+	}
 
-	stopShowingProgress = () => {
+	stopShowingProgress() {
 		this.progressBar.setValue(1);
 		if (this.options.hideImmediately) {
 			this.hideProgressBar();
 		} else {
 			this.finishAnimationAndHideProgressBar();
 		}
-	};
+	}
 
-	showProgressBar = () => {
+	showProgressBar() {
 		this.cancelHideProgressBarTimeout();
 		this.progressBar.show();
-	};
+	}
 
-	showProgressBarAfterDelay = () => {
+	showProgressBarAfterDelay() {
 		this.cancelShowProgressBarTimeout();
 		this.cancelHideProgressBarTimeout();
 		this.showProgressBarTimeout = window.setTimeout(this.showProgressBar, this.options.delay);
-	};
+	}
 
-	hideProgressBar = () => {
+	hideProgressBar() {
 		this.cancelShowProgressBarTimeout();
 		this.progressBar.hide();
-	};
+	}
 
-	finishAnimationAndHideProgressBar = () => {
+	finishAnimationAndHideProgressBar() {
 		this.cancelShowProgressBarTimeout();
 		this.hideProgressBarTimeout = window.setTimeout(this.hideProgressBar, this.options.transition);
-	};
+	}
 
-	cancelShowProgressBarTimeout = () => {
+	cancelShowProgressBarTimeout() {
 		window.clearTimeout(this.showProgressBarTimeout);
 		delete this.showProgressBarTimeout;
-	};
+	}
 
-	cancelHideProgressBarTimeout = () => {
+	cancelHideProgressBarTimeout() {
 		window.clearTimeout(this.hideProgressBarTimeout);
 		delete this.hideProgressBarTimeout;
-	};
+	}
 }
