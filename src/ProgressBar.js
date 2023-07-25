@@ -9,7 +9,7 @@ export default class ProgressBar {
 
 	constructor({
 		className = 'progress-bar',
-		styleAttr = 'data-progressbar-styles',
+		styleAttr = 'data-progressbar-styles data-swup-theme',
 		animationDuration = 300,
 		minValue = 0.1,
 		initialValue = 0.25,
@@ -119,7 +119,7 @@ export default class ProgressBar {
 
 	createStyleElement() {
 		const element = document.createElement('style');
-		element.setAttribute(this.styleAttr, '');
+		this.styleAttr.split(' ').forEach((attr) => element.setAttribute(attr, ''));
 		element.textContent = this.defaultStyles;
 		return element;
 	}
