@@ -4,6 +4,7 @@
 
 ## [3.0.0] - 2023-07-26
 
+- Finish animation by default
 - Update for swup 4 compatibility
 
 ## [2.0.0] - 2023-03-10

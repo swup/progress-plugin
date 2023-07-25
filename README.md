@@ -52,7 +52,7 @@ The progress bar has a class name of `swup-progress-bar` you can use for styling
   transition: 300,
   delay: 300,
   initialValue: 0.25,
-  hideImmediately: true
+  finishAnimation: true
 }
 ```
 
@@ -76,8 +76,6 @@ To create a slightly more "realistic" appearance, the progress bar will start
 out at a random position beteen 0 and the value of this option. Set to `0` to
 always start from the left.
 
-### hideImmediately
+### finishAnimation
 
-Whether the progress bar is hidden instantly after a page visit.
-
-Set to `false` to always complete the transition to `width: 100%` before hiding it.
+Whether the progress bar will complete the transition to 100% before hiding.

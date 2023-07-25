@@ -10,7 +10,7 @@ export default class SwupProgressPlugin extends Plugin {
 		transition: undefined,
 		minValue: undefined,
 		initialValue: undefined,
-		hideImmediately: true
+		finishAnimation: true
 	};
 
 	showProgressBarTimeout = null;
@@ -37,10 +37,10 @@ export default class SwupProgressPlugin extends Plugin {
 
 	stopShowingProgress() {
 		this.progressBar.setValue(1);
-		if (this.options.hideImmediately) {
-			this.hideProgressBar();
-		} else {
+		if (this.options.finishAnimation) {
 			this.finishAnimationAndHideProgressBar();
+		} else {
+			this.hideProgressBar();
 		}
 	}
 
