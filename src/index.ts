@@ -1,26 +1,42 @@
 import Plugin from '@swup/plugin';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './ProgressBar.js';
+
+type Options = {
+	className: string;
+	delay: number;
+	transition: number;
+	minValue: number;
+	initialValue: number;
+	finishAnimation: boolean;
+};
 
 export default class SwupProgressPlugin extends Plugin {
 	name = 'SwupProgressPlugin';
 
-	defaults = {
+	defaults: Options = {
 		className: 'swup-progress-bar',
 		delay: 300,
-		transition: undefined,
-		minValue: undefined,
-		initialValue: undefined,
+		transition: 300,
+		minValue: 0.1,
+		initialValue: 0.25,
 		finishAnimation: true
 	};
+	options: Options;
 
-	showProgressBarTimeout = null;
-	hideProgressBarTimeout = null;
+	progressBar: ProgressBar;
+	showProgressBarTimeout?: number;
+	hideProgressBarTimeout?: number;
 
-	constructor(options = {}) {
+	constructor(options: Partial<Options> = {}) {
 		super();
 		this.options = { ...this.defaults, ...options };
 		const { className, minValue, initialValue, transition: animationDuration } = this.options;
-		this.progressBar = new ProgressBar({ className, minValue, initialValue, animationDuration });
+		this.progressBar = new ProgressBar({
+			className,
+			minValue,
+			initialValue,
+			animationDuration
+		});
 	}
 
 	mount() {
@@ -50,7 +66,10 @@ export default class SwupProgressPlugin extends Plugin {
 	showProgressBarAfterDelay() {
 		this.cancelShowProgressBarTimeout();
 		this.cancelHideProgressBarTimeout();
-		this.showProgressBarTimeout = window.setTimeout(this.showProgressBar.bind(this), this.options.delay);
+		this.showProgressBarTimeout = window.setTimeout(
+			this.showProgressBar.bind(this),
+			this.options.delay
+		);
 	}
 
 	hideProgressBar() {
@@ -60,7 +79,10 @@ export default class SwupProgressPlugin extends Plugin {
 
 	finishAnimationAndHideProgressBar() {
 		this.cancelShowProgressBarTimeout();
-		this.hideProgressBarTimeout = window.setTimeout(this.hideProgressBar.bind(this), this.options.transition);
+		this.hideProgressBarTimeout = window.setTimeout(
+			this.hideProgressBar.bind(this),
+			this.options.transition
+		);
 	}
 
 	cancelShowProgressBarTimeout() {
