@@ -29,12 +29,24 @@ export default class ProgressBar {
 		initialValue?: number;
 		trickleValue?: number;
 	} = {}) {
-		this.className = String(className ?? this.className);
-		this.styleAttr = String(styleAttr ?? this.styleAttr);
-		this.animationDuration = Number(animationDuration ?? this.animationDuration);
-		this.minValue = Number(minValue ?? this.minValue);
-		this.initialValue = Number(initialValue ?? this.initialValue);
-		this.trickleValue = Number(trickleValue ?? this.trickleValue);
+		if (className !== undefined) {
+			this.className = String(className);
+		}
+		if (styleAttr !== undefined) {
+			this.styleAttr = String(styleAttr);
+		}
+		if (animationDuration !== undefined) {
+			this.animationDuration = Number(animationDuration);
+		}
+		if (minValue !== undefined) {
+			this.minValue = Number(minValue);
+		}
+		if (initialValue !== undefined) {
+			this.initialValue = Number(initialValue);
+		}
+		if (trickleValue !== undefined) {
+			this.trickleValue = Number(trickleValue);
+		}
 
 		this.styleElement = this.createStyleElement();
 		this.progressElement = this.createProgressElement();
@@ -42,20 +54,20 @@ export default class ProgressBar {
 
 	get defaultStyles(): string {
 		return `
-    .${this.className} {
-      position: fixed;
-      display: block;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background-color: black;
-      z-index: 9999;
-      transition:
-        width ${this.animationDuration}ms ease-out,
-        opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
-      transform: translate3d(0, 0, 0);
-    }
-  `;
+		.${this.className} {
+			position: fixed;
+			display: block;
+			top: 0;
+			left: 0;
+			height: 3px;
+			background-color: black;
+			z-index: 9999;
+			transition:
+				width ${this.animationDuration}ms ease-out,
+				opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
+			transform: translate3d(0, 0, 0);
+		}
+	`;
 	}
 
 	show(): void {
