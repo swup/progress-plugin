@@ -2,6 +2,10 @@
 
 <!-- ## [Unreleased] -->
 
+## [3.1.0] - 2023-07-29
+
+- Port to TypeScript
+
 ## [3.0.0] - 2023-07-26
 
 - Finish animation by default
@@ -26,8 +30,9 @@
 
 - Initial release
 
-[Unreleased]: https://github.com/swup/progress-plugin/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/swup/progress-plugin/compare/3.1.0...HEAD
 
+[3.1.0]: https://github.com/swup/progress-plugin/releases/tag/3.1.0
 [3.0.0]: https://github.com/swup/progress-plugin/releases/tag/3.0.0
 [2.0.0]: https://github.com/swup/progress-plugin/releases/tag/2.0.0
 [1.2.0]: https://github.com/swup/progress-plugin/releases/tag/1.2.0
