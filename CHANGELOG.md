@@ -3,6 +3,7 @@
 ## [3.1.1] - 2023-09-25
 
 - Add missing `types` entry in `package.json`
+- Update @swup/plugin base class
 
 ## [3.1.0] - 2023-07-29
 
