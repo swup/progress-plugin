@@ -1,6 +1,9 @@
 # Changelog
 
-<!-- ## [Unreleased] -->
+## [3.1.1] - 2023-09-25
+
+- Add missing `types` entry in `package.json`
+- Update @swup/plugin base class
 
 ## [3.1.0] - 2023-07-29
 
@@ -30,8 +33,9 @@
 
 - Initial release
 
-[Unreleased]: https://github.com/swup/progress-plugin/compare/3.1.0...HEAD
+[Unreleased]: https://github.com/swup/progress-plugin/compare/3.1.1...HEAD
 
+[3.1.1]: https://github.com/swup/progress-plugin/releases/tag/3.1.1
 [3.1.0]: https://github.com/swup/progress-plugin/releases/tag/3.1.0
 [3.0.0]: https://github.com/swup/progress-plugin/releases/tag/3.0.0
 [2.0.0]: https://github.com/swup/progress-plugin/releases/tag/2.0.0
