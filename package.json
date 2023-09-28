@@ -1,7 +1,7 @@
 {
   "name": "@swup/progress-plugin",
   "amdName": "SwupProgressPlugin",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "A swup plugin for displaying a progress bar",
   "type": "module",
   "source": "src/index.ts",
