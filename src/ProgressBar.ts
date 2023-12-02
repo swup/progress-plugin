@@ -137,6 +137,7 @@ export default class ProgressBar {
 
 	private refresh(): void {
 		requestAnimationFrame(() => {
+			document.documentElement.style.setProperty('--swup-progress', this.value.toFixed(4));
 			this.progressElement.style.width = `${this.value * 100}%`;
 		});
 	}
