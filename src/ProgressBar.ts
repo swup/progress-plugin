@@ -59,13 +59,15 @@ export default class ProgressBar {
 			display: block;
 			top: 0;
 			left: 0;
+      width: 100%;
 			height: 3px;
 			background-color: black;
 			z-index: 9999;
 			transition:
-				width ${this.animationDuration}ms ease-out,
+				transform ${this.animationDuration}ms ease-out,
 				opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
-			transform: translate3d(0, 0, 0);
+	  transform: translate3d(0, 0, 0) scaleX(var(--progress, 0));
+      transform-origin: 0;
 		}
 	`;
 	}
@@ -97,13 +99,13 @@ export default class ProgressBar {
 	}
 
 	private installStyleElement(): void {
-		document.head.insertBefore(this.styleElement!, document.head.firstChild);
+		document.head.prepend(this.styleElement);
 	}
 
 	private installProgressElement(): void {
-		this.progressElement.style.width = '0%';
+		this.progressElement.style.setProperty('--progress', String(0));
 		this.progressElement.style.opacity = '1';
-		document.documentElement.insertBefore(this.progressElement!, document.body);
+		document.body.prepend(this.progressElement);
 		this.progressElement.scrollTop = 0; // Force reflow to ensure the initial style takes effect
 		this.setValue(Math.random() * this.initialValue);
 	}
@@ -114,9 +116,7 @@ export default class ProgressBar {
 	}
 
 	private uninstallProgressElement(): void {
-		if (this.progressElement.parentNode) {
-			document.documentElement.removeChild(this.progressElement!);
-		}
+		this.progressElement.remove();
 	}
 
 	private startTrickling(): void {
@@ -137,7 +137,7 @@ export default class ProgressBar {
 
 	private refresh(): void {
 		requestAnimationFrame(() => {
-			this.progressElement.style.width = `${this.value * 100}%`;
+			this.progressElement.style.setProperty("--progress", String(this.value));
 		});
 	}
 
@@ -151,6 +151,7 @@ export default class ProgressBar {
 	private createProgressElement(): HTMLDivElement {
 		const element = document.createElement('div');
 		element.className = this.className;
+		element.setAttribute('aria-hidden', 'true');
 		return element;
 	}
 }
