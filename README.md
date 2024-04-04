@@ -4,7 +4,6 @@ A [swup](https://swup.js.org) plugin for displaying a progress bar.
 
 Shows a loading indicator for requests taking longer than ~300ms.
 
-
 ## Installation
 
 Install the plugin from npm and import it into your bundle.
