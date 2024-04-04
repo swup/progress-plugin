@@ -137,7 +137,7 @@ export default class ProgressBar {
 
 	private refresh(): void {
 		requestAnimationFrame(() => {
-			this.progressElement.style.setProperty("--progress", String(this.value));
+			this.progressElement.style.setProperty('--progress', String(this.value));
 		});
 	}
 
