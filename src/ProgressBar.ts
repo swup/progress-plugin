@@ -50,7 +50,6 @@ export default class ProgressBar {
 
 		this.styleElement = this.createStyleElement();
 		this.progressElement = this.createProgressElement();
-		this.installStyleElement();
 	}
 
 	get defaultStyles(): string {
@@ -76,6 +75,7 @@ export default class ProgressBar {
 	show(): void {
 		if (!this.visible) {
 			this.visible = true;
+			this.installStyleElement();
 			this.installProgressElement();
 			this.startTrickling();
 		}
