@@ -59,13 +59,15 @@ export default class ProgressBar {
 			display: block;
 			top: 0;
 			left: 0;
+      width: 100%;
 			height: 3px;
 			background-color: black;
 			z-index: 9999;
 			transition:
-				width ${this.animationDuration}ms ease-out,
+				transform ${this.animationDuration}ms ease-out,
 				opacity ${this.animationDuration / 2}ms ${this.animationDuration / 2}ms ease-in;
-			transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      transform-origin: 0;
 		}
 	`;
 	}
@@ -101,7 +103,7 @@ export default class ProgressBar {
 	}
 
 	private installProgressElement(): void {
-		this.progressElement.style.width = '0%';
+		this.progressElement.style.transform = 'translate3d(0, 0, 0) scaleX(0)';
 		this.progressElement.style.opacity = '1';
 		document.documentElement.insertBefore(this.progressElement!, document.body);
 		this.progressElement.scrollTop = 0; // Force reflow to ensure the initial style takes effect
@@ -137,7 +139,7 @@ export default class ProgressBar {
 
 	private refresh(): void {
 		requestAnimationFrame(() => {
-			this.progressElement.style.width = `${this.value * 100}%`;
+			this.progressElement.style.transform = `translate3d(0, 0, 0) scaleX(${this.value})`;
 		});
 	}
 
