@@ -50,6 +50,7 @@ export default class ProgressBar {
 
 		this.styleElement = this.createStyleElement();
 		this.progressElement = this.createProgressElement();
+		this.installStyleElement();
 	}
 
 	get defaultStyles(): string {
@@ -75,7 +76,6 @@ export default class ProgressBar {
 	show(): void {
 		if (!this.visible) {
 			this.visible = true;
-			this.installStyleElement();
 			this.installProgressElement();
 			this.startTrickling();
 		}
@@ -99,13 +99,13 @@ export default class ProgressBar {
 	}
 
 	private installStyleElement(): void {
-		document.head.insertBefore(this.styleElement!, document.head.firstChild);
+		document.head.prepend(this.styleElement);
 	}
 
 	private installProgressElement(): void {
 		this.progressElement.style.setProperty('--progress', String(0));
 		this.progressElement.style.opacity = '1';
-		document.documentElement.insertBefore(this.progressElement!, document.body);
+		document.body.prepend(this.progressElement);
 		this.progressElement.scrollTop = 0; // Force reflow to ensure the initial style takes effect
 		this.setValue(Math.random() * this.initialValue);
 	}
@@ -116,9 +116,7 @@ export default class ProgressBar {
 	}
 
 	private uninstallProgressElement(): void {
-		if (this.progressElement.parentNode) {
-			document.documentElement.removeChild(this.progressElement!);
-		}
+		this.progressElement.remove();
 	}
 
 	private startTrickling(): void {
