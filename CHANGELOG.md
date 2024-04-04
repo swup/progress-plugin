@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.0] - 2024-04-04
+
+- Make the progress bar more adjustable
+
 ## [3.1.2] - 2023-09-28
 
 - Use `@swup/cli` for bundling
@@ -37,8 +41,7 @@
 
 - Initial release
 
-[Unreleased]: https://github.com/swup/progress-plugin/compare/3.1.1...HEAD
-
+[3.2.0]: https://github.com/swup/progress-plugin/releases/tag/3.2.0
 [3.1.2]: https://github.com/swup/progress-plugin/releases/tag/3.1.2
 [3.1.1]: https://github.com/swup/progress-plugin/releases/tag/3.1.1
 [3.1.0]: https://github.com/swup/progress-plugin/releases/tag/3.1.0
