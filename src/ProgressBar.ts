@@ -153,7 +153,7 @@ export default class ProgressBar {
 	private createProgressElement(): HTMLDivElement {
 		const element = document.createElement('div');
 		element.className = this.className;
-    element.setAttribute('aria-hidden', 'true');
+		element.setAttribute('aria-hidden', 'true');
 		return element;
 	}
 }
